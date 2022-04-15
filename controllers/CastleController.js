@@ -12,7 +12,7 @@ const GetAllCastles = async (req, res) => {
 const GetCastleDetails = async (req, res) => {
     try {
         const castle = await Castles.findByPk(
-            req.params.property_id
+            req.params.castle_id
         )
         res.send(castle)
     } catch (error) {
