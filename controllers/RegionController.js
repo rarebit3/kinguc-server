@@ -12,7 +12,7 @@ const GetAllRegions = async (req, res) => {
 const GetRegionDetails = async (req, res) => {
     try {
         const region = await Regions.findByPk(
-            req.params.property_id
+            req.params.region_id
         )
         res.send(region)
     } catch (error) {
@@ -33,7 +33,8 @@ const UpdateRegion = async (req, res) => {
     try {
         const regionId = parseInt(req.params.region_id)
         const updatedRegion = await Regions.update(req.body, {
-            where: { id: regionId}
+            where: { id: regionId},
+            returning: true
         })
         res.send(updatedRegion)
     } catch (error) {

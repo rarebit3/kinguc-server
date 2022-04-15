@@ -12,7 +12,7 @@ const GetAllUsers = async (req, res) => {
 const GetUserDetails = async (req, res) => {
     try {
         const user = await User.findByPk(
-            req.params.property_id
+            req.params.user_id
         )
         res.send(user)
     } catch (error) {
