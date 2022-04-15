@@ -33,7 +33,8 @@ const UpdateRegion = async (req, res) => {
     try {
         const regionId = parseInt(req.params.region_id)
         const updatedRegion = await Regions.update(req.body, {
-            where: { id: regionId}
+            where: { id: regionId},
+            returning: true
         })
         res.send(updatedRegion)
     } catch (error) {
