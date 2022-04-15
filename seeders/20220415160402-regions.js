@@ -13,6 +13,7 @@ module.exports = {
     population: 350,
     numberOfNobles: 1,
     capitalCity: 'Pliska',
+    userId: 3,
    createdAt: new Date(),
    updatedAt: new Date()
     }, 
@@ -24,6 +25,7 @@ module.exports = {
       population: 879,
       numberOfNobles: 1,
       capitalCity: 'Wnchester, London',
+      userId: 1,
      createdAt: new Date(),
      updatedAt: new Date()
       }, 
@@ -32,6 +34,7 @@ module.exports = {
         name: 'Athens',
         population: 700,
         numberOfNobles: 1,
+        userId: 2,
         capitalCity: 'Athens',
        createdAt: new Date(),
        updatedAt: new Date() 

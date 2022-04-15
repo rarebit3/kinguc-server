@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, Sequelize
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Regions extends Model {
@@ -10,7 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Regions.belongsTo(models.User, {
+        as: 'ruler',
+        foreignKey: 'userId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      })
     }
   }
   Regions.init({
@@ -18,7 +23,16 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     population: DataTypes.INTEGER,
     numberOfNobles: DataTypes.INTEGER,
-    capitalCity: DataTypes.STRING
+    capitalCity: DataTypes.STRING,
+    userId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+      references: {
+        model: 'users',
+        key: 'id'
+      }
+    }
   }, {
     sequelize,
     modelName: 'Regions',

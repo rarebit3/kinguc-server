@@ -33,7 +33,8 @@ const UpdateCastle = async (req, res) => {
     try {
         const castleId = parseInt(req.params.castle_id)
         const updatedCastle = await Castles.update(req.body, {
-            where: { id: castleId}
+            where: { id: castleId},
+            returning: true
         })
         res.send(updatedCastle)
     } catch (error) {
