@@ -1,4 +1,4 @@
-const { User } = require('../models')
+const { User, Regions } = require('../models')
 
 const GetAllUsers = async (req, res) => {
     try {
@@ -6,6 +6,20 @@ const GetAllUsers = async (req, res) => {
         res.send(users)
     } catch (error) {
       throw error  
+    }
+}
+
+const GetUsersAndRegions = async (req, res) => {
+    try {
+        const data = await User.findAll({
+            include: [{
+                model: Regions,
+                as: 'ruler_of',
+            }]
+        })
+        res.send(data)
+    } catch (error) {
+        throw error
     }
 }
 
@@ -56,6 +70,7 @@ const DeleteUser = async (req, res) => {
 
 
 module.exports = {
+    GetUsersAndRegions,
     GetAllUsers,
     GetUserDetails,
     CreateUser,

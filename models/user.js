@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.hasOne(models.Regions, {
-        as: 'ruled_by',
+        as: 'ruler_of',
         foreignKey: 'userId',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
