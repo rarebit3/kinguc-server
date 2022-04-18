@@ -1,4 +1,28 @@
-const { User, Regions } = require('../models')
+const { User, Regions, sequelize } = require('../models')
+const { Op } = require('Sequelize')
+
+const SearchUsers = async (req, res) => {
+    try {
+        console.log(req.query)
+        const query = req.query.keyword
+        const data = await User.findAll({
+            where: {
+                name: {
+                    [Op.iLike]: `%${query}%`
+                }
+            },
+            
+            include: [{
+                model: Regions,
+                as: 'ruler_of',
+            }]
+        })
+        res.send(data)
+    } catch (error) {
+        throw error
+    }
+}
+
 
 const GetAllUsers = async (req, res) => {
     try {
@@ -75,5 +99,6 @@ module.exports = {
     GetUserDetails,
     CreateUser,
     UpdateUser,
-    DeleteUser 
+    DeleteUser,
+    SearchUsers 
 }
