@@ -16,6 +16,13 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       })
+      // ,
+      // User.hasMany(model.Castles, {
+      //   as: 'owner_of',
+      //   foreignKey: 'userId',
+      //   onDelete: 'CASCADE',
+      //   onUpdate: 'CASCADE'
+      // })
     }
   }
   User.init({

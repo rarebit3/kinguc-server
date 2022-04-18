@@ -1,6 +1,7 @@
 const Router = require('express').Router()
 const controller = require('../controllers/UserController')
 
+Router.get('/search', controller.SearchUsers)
 Router.get('/', controller.GetUsersAndRegions)
 // Router.get('/', controller.GetAllUsers)
 // Router.get('/:user_id', controller.GetUserDetails)
