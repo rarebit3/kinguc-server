@@ -1,8 +1,50 @@
-const { Castles } = require('../models')
+const { Castles, User, Regions } = require('../models')
+const { Op } = require('Sequelize')
+
+const SearchCastles = async (req, res) => {
+    try {
+        const query = req.query.keyword
+        const data = await Castles.findAll({
+            where: {
+                name: {
+                    [Op.iLike]: `%${query}%`
+                }
+            },
+            include: [
+                {
+                    model: User,
+                    as: 'owned_by',
+                    attributes: ['id', 'name']
+                },
+                {
+                    model: Regions,
+                    as: 'location',
+                    attributes: ['id', 'name']
+                }
+            ]
+        })
+        res.send(data)
+    } catch (error) {
+        throw error
+    }
+}
 
 const GetAllCastles = async (req, res) => {
     try {
-        const castles = await Castles.findAll()
+        const castles = await Castles.findAll({
+            include: [
+                {
+                    model: User,
+                    as: 'owned_by',
+                    attributes: ['id', 'name']
+                },
+                {
+                    model: Regions,
+                    as: 'location',
+                    attributes: ['id', 'name']
+                }
+            ]
+        })
         res.send(castles)
     } catch (error) {
         throw error
@@ -12,7 +54,20 @@ const GetAllCastles = async (req, res) => {
 const GetCastleDetails = async (req, res) => {
     try {
         const castle = await Castles.findByPk(
-            req.params.castle_id
+            req.params.castle_id, {
+                include: [
+                {
+                    model: User,
+                    as: 'owned_by',
+                    attributes: ['id', 'name']
+                },
+                {
+                    model: Regions,
+                    as: 'location',
+                    attributes: ['id', 'name']
+                }
+            ]}
+            
         )
         res.send(castle)
     } catch (error) {
@@ -59,5 +114,6 @@ module.exports = {
     GetCastleDetails,
     CreateCastle,
     UpdateCastle,
-    DeleteCastle
+    DeleteCastle,
+    SearchCastles
 }

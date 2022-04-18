@@ -1,6 +1,7 @@
 const Router = require('express').Router()
 const controller = require('../controllers/CastleController')
 
+Router.get('/search', controller.SearchCastles)
 Router.get('/', controller.GetAllCastles)
 Router.get('/:castle_id', controller.GetCastleDetails)
 Router.post('/', controller.CreateCastle)

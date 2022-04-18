@@ -3,7 +3,6 @@ const { Op } = require('Sequelize')
 
 const SearchUsers = async (req, res) => {
     try {
-        console.log(req.query)
         const query = req.query.keyword
         const data = await User.findAll({
             where: {
@@ -12,10 +11,13 @@ const SearchUsers = async (req, res) => {
                 }
             },
             
-            include: [{
+            include: [
+                {
                 model: Regions,
                 as: 'ruler_of',
-            }]
+                attributes: ['id', 'name']
+                }
+            ]
         })
         res.send(data)
     } catch (error) {
