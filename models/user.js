@@ -25,11 +25,30 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
-    name: DataTypes.STRING,
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    magicEmail: DataTypes.STRING,
-    highAbility: DataTypes.BOOLEAN
+    name: {
+      type: DataTypes.STRING,
+      
+    },
+    username:{
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    } ,
+    passwordDigest:{
+      type: DataTypes.STRING,
+      allowNull: false
+    } ,
+    magicEmail:{
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isEmail: true
+      }
+    } ,
+    highAbility: {
+      type: DataTypes.BOOLEAN,
+      
+    }
   }, {
     sequelize,
     modelName: 'User',
