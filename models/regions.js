@@ -16,6 +16,12 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       })
+      Regions.hasMany(models.Castles, {
+        as: 'castles',
+        foreignKey: 'regionId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      })
     }
   }
   Regions.init({

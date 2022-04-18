@@ -10,7 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Castles.belongsTo(models.Regions, {
+        as: 'location',
+        foreignKey: 'regionId',
+        onDelete: 'CASACDE',
+        onUpdate: 'CASCADE'
+      })
     }
   }
   Castles.init({
