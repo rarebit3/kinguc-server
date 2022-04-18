@@ -29,9 +29,6 @@ const SearchCastles = async (req, res) => {
     }
 }
 
-
-
-
 const GetAllCastles = async (req, res) => {
     try {
         const castles = await Castles.findAll({

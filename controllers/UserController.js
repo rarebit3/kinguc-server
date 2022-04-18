@@ -11,11 +11,13 @@ const SearchUsers = async (req, res) => {
                 }
             },
             
-            include: [{
+            include: [
+                {
                 model: Regions,
                 as: 'ruler_of',
                 attributes: ['id', 'name']
-            }]
+                }
+            ]
         })
         res.send(data)
     } catch (error) {
