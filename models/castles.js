@@ -16,6 +16,14 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASACDE',
         onUpdate: 'CASCADE'
       })
+      // ,
+      // Castles.belongsToMany(models.User, {
+      //   through: models.Regions,
+      //   as: 'owner',
+      //   foreignKey: 'userId',
+      //   onDelete: 'CASCADE',
+      //   onUpdate: 'CASCADE'
+      // })
     }
   }
   Castles.init({
@@ -24,7 +32,25 @@ module.exports = (sequelize, DataTypes) => {
     servantCount: DataTypes.INTEGER,
     incomePerCastle: DataTypes.INTEGER,
     country: DataTypes.STRING,
-    image: DataTypes.STRING
+    image: DataTypes.STRING,
+    regionId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+      references: {
+        model: 'regions',
+        key: 'id'
+      }
+    },
+    // userId: {
+    //   type: DataTypes.INTEGER,
+    //   onDelete: 'CASCADE',
+    //   onUpdate: 'CASCADE',
+    //   references: {
+    //     model: 'users',
+    //     key: 'id'
+    //   }
+    // }
   }, {
     sequelize,
     modelName: 'Castles',
