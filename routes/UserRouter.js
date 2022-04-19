@@ -7,6 +7,6 @@ Router.get('/', controller.GetUsersAndRegions)
 // Router.get('/:user_id', controller.GetUserDetails)
 // Router.post('/', controller.CreateUser)
 // Router.put('/:user_id', controller.UpdateUser)
-// Router.delete('/:user_id', controller.DeleteUser)
+ Router.delete('/:user_id', controller.DeleteUser)
 
 module.exports = Router
