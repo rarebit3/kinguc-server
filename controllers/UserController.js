@@ -52,7 +52,13 @@ const GetUsersAndRegions = async (req, res) => {
 const GetUserDetails = async (req, res) => {
     try {
         const user = await User.findByPk(
-            req.params.user_id
+            req.params.user_id, {
+                include: [{
+                    model: Regions,
+                    as: 'ruler_of',
+                }]
+            }
+            
         )
         res.send(user)
     } catch (error) {
