@@ -39,7 +39,33 @@ const Register = async (req, res) => {
   }
 }
 
+const UpdatePassword = async (req, res) => {
+  try {
+    const { oldPass, newPass } = req.body
+    const user = await User.findByPk(req.params.user_id)
+    if (
+      user &&
+      (await middleware.comparePassword (
+        user.dataValues.passwordDigest,
+        oldPass
+      ))
+    ) {
+      let passwordDigest = await middleware.hashPassword(newPass)
+      await user.update({passwordDigest})
+      return res.send({ status: 'Good', payload: user })
+    }
+    res.status(401).send({ status: 'Error', msg: 'Unauthorized'})
+  } catch (error) {throw error}
+}
+
+const CheckSession = async (req, res) => {
+  const {payload} = res.locals
+  res.send(payload)
+}
+
 module.exports = {
   Login,
-  Register
+  Register,
+  UpdatePassword,
+  CheckSession
 }
