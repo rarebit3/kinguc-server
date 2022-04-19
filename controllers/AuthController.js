@@ -40,6 +40,7 @@ const Register = async (req, res) => {
   }
 }
 
+
 const UpdatePassword = async (req, res) => {
   try {
     const { oldPass, newPass } = req.body
