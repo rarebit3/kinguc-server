@@ -1,4 +1,4 @@
-const { User } = require('../models')
+const { User, Castles } = require('../models')
 const middleware = require('../middleware')
 
 
@@ -60,6 +60,15 @@ const UpdatePassword = async (req, res) => {
   } catch (error) {throw error}
 }
 
+const RegisterCastle = async (req, res) => {
+  try {
+    const newCastle = await Castles.create(req.body)
+    res.send(newCastle)
+} catch (error) {
+    throw error
+}
+}
+
 const CheckSession = async (req, res) => {
   const {payload} = res.locals
   res.send(payload)
@@ -69,5 +78,6 @@ module.exports = {
   Login,
   Register,
   UpdatePassword,
-  CheckSession
+  CheckSession,
+  RegisterCastle
 }

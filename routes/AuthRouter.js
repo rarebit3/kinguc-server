@@ -6,6 +6,12 @@ const middleware = require('../middleware')
 router.post('/login', controller.Login)
 router.post('/register', controller.Register)
 
+router.post('/registercastle',
+    middleware.stripToken,
+    middleware.verifyToken,
+    controller.RegisterCastle
+)
+
 
 router.post(
     '/update',
