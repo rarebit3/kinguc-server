@@ -20,6 +20,12 @@ router.put(
     controller.UpdatePassword
 )
 
+router.delete(
+    '/delete/:userId',
+    middleware.stripToken,
+    middleware.verifyToken,
+    controller.DeleteUser
+)
 
 router.get(
     '/session',

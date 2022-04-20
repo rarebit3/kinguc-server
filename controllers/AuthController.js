@@ -1,5 +1,6 @@
 const { User, Castles } = require('../models')
 const middleware = require('../middleware')
+const res = require('express/lib/response')
 
 
 const Login = async (req, res) => {
@@ -64,6 +65,18 @@ const UpdatePassword = async (req, res) => {
   } catch (error) {throw error}
 }
 
+const DeleteUser = async (req, res) => {
+  try {
+    const userId = parseInt(req.params.userId)
+    await User.destroy({
+        where: { id: userId }
+    })
+    res.send({ message: `Deleted user with an id of ${userId}`})
+  } catch (error) {
+    throw error
+  }
+}
+
 const RegisterCastle = async (req, res) => {
   try {
     const newCastle = await Castles.create(req.body)
@@ -83,5 +96,6 @@ module.exports = {
   Register,
   UpdatePassword,
   CheckSession,
-  RegisterCastle
+  RegisterCastle,
+  DeleteUser
 }
