@@ -13,8 +13,8 @@ router.post('/registercastle',
 )
 
 
-router.post(
-    '/update',
+router.put(
+    '/update/:userId',
     middleware.stripToken,
     middleware.verifyToken,
     controller.UpdatePassword
