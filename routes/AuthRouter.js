@@ -12,6 +12,12 @@ router.post('/registercastle',
     controller.RegisterCastle
 )
 
+router.put(
+    '/update/profile/:userId',
+    middleware.stripToken,
+    middleware.verifyToken,
+    controller.UpdateProfile
+)
 
 router.put(
     '/update/:userId',
