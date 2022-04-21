@@ -44,7 +44,7 @@ const Register = async (req, res) => {
 
 const UpdatePassword = async (req, res) => {
   try {
-    const userId = req.params.userId
+    const userId = parseInt(req.params.userId)
     const { currentPassword, newPassword } = req.body
     const user = await User.findByPk(userId)
     if (
@@ -63,6 +63,19 @@ const UpdatePassword = async (req, res) => {
     }
     res.status(401).send({ status: 'Error', msg: 'Unauthorized'})
   } catch (error) {throw error}
+}
+
+const UpdateProfile = async (req, res) => {
+  try {
+    const userId = parseInt(req.params.userId)
+    const updateUser = await User.update(req.body, {
+      where: { id: userId },
+      returning: true
+    })
+    return res.send({ status: 'Good', payload: updateUser })
+  } catch (error) {
+    throw error
+  }
 }
 
 const DeleteUser = async (req, res) => {
@@ -97,5 +110,6 @@ module.exports = {
   UpdatePassword,
   CheckSession,
   RegisterCastle,
-  DeleteUser
+  DeleteUser,
+  UpdateProfile
 }
