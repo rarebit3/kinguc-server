@@ -1,5 +1,5 @@
 const { Castles, User, Regions } = require('../models')
-const { Op } = require('Sequelize')
+const { Op } = require('sequelize')
 
 const SearchCastles = async (req, res) => {
     try {
