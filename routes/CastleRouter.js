@@ -16,6 +16,9 @@ Router.put('/:castle_id',
     controller.UpdateCastle
 )
 
-Router.delete('/:castle_id', controller.DeleteCastle)
+Router.delete('/:castle_id',
+    middleware.stripToken,
+    middleware.verifyToken,
+    controller.DeleteCastle)
 
 module.exports = Router
